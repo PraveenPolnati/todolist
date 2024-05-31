@@ -33,10 +33,12 @@ class TaskCard extends Component {
         const { onEdit, each } = this.props;
         const { id } = each;
         const { editText } = this.state;
-        const item = { id, text: editText };
+        const newText = editText.trim() === '' ? each.todoItem : editText;
+        const item = { id, text: newText };
         onEdit(item);
         this.setState({ isEdit: false });
     }
+    
 
     render() {
         const { isChecked, isEdit, editText } = this.state;
