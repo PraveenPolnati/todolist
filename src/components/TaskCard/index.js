@@ -3,17 +3,21 @@ import './index.css';
 
 class TaskCard extends Component {
     state = {
-        isChecked: false,
         isEdit: false,
-        editText: ''
+        editText: '',
+        isChecked: this.props.each.isChecked
     }
 
     onEditingText = (event) => {
         this.setState({ editText: event.target.value });
     }
 
-    onChecked = () => {
-        this.setState(prevState => ({ isChecked: !prevState.isChecked }));
+    toggleCheck = () => {
+        const { onCheck, each } = this.props;
+        const { id } = each;
+        this.setState(prevState => ({ isChecked: !prevState.isChecked }), () => {
+            onCheck(id);
+        });
     }
 
     delete = () => {
@@ -38,7 +42,6 @@ class TaskCard extends Component {
         onEdit(item);
         this.setState({ isEdit: false });
     }
-    
 
     render() {
         const { isChecked, isEdit, editText } = this.state;
@@ -48,17 +51,36 @@ class TaskCard extends Component {
         return (
             <div className='todoTable'>
                 <div className='card1'>
-                    <input onClick={this.onChecked} className='' id={id} type='checkbox' />
-                    {isEdit ?
-                        <input className='editTextCard' value={editText} onChange={this.onEditingText} type="text" /> :
-                        <label onClick={this.onChecked} className={`taskLabel ${isChecked && 'checkedStyle'}`} htmlFor={id}>{todoItem}</label>
-                    }
+                    <input
+                        checked={isChecked}
+                        onChange={this.toggleCheck}
+                        className=''
+                        id={id}
+                        type='checkbox'
+                    />
+                    {isEdit ? (
+                        <input
+                            className='editTextCard'
+                            value={editText}
+                            onChange={this.onEditingText}
+                            type="text"
+                        />
+                    ) : (
+                        <label
+                            onClick={this.toggleCheck}
+                            className={`taskLabel ${isChecked ? 'checkedStyle' : ''}`}
+                            htmlFor={id}
+                        >
+                            {todoItem}
+                        </label>
+                    )}
                 </div>
                 <div className='btnCard'>
-                    {isEdit ?
-                        <button onClick={this.saveEdit} type='button'>Save</button> :
+                    {isEdit ? (
+                        <button onClick={this.saveEdit} type='button'>Save</button>
+                    ) : (
                         <button onClick={this.toggleEdit} type='button'>Edit</button>
-                    }
+                    )}
                     <button onClick={this.delete} type='button'>Delete</button>
                 </div>
             </div>
