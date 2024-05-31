@@ -33,6 +33,8 @@
 
 .editTextCard{
     background-color: transparent;
-    border: 0px;
+    border: 1px solid grey;
+    border-radius: 5px;
     outline: none;
+    width: 30vw;
 }
