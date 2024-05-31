@@ -46,7 +46,7 @@ class TaskCard extends Component {
         return (
             <div className='todoTable'>
                 <div className='card1'>
-                    <input className='' id={id} type='checkbox' />
+                    <input onClick={this.onChecked} className='' id={id} type='checkbox' />
                     {isEdit ?
                         <input className='editTextCard' value={editText} onChange={this.onEditingText} type="text" /> :
                         <label onClick={this.onChecked} className={`taskLabel ${isChecked && 'checkedStyle'}`} htmlFor={id}>{todoItem}</label>
