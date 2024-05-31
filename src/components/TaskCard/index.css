@@ -1,0 +1,38 @@
+.todoTable{
+    border: 1px solid grey;
+    width: 50vw;
+    height: 30px;
+    margin-left: 30px;
+    border-radius: 10px;  
+    padding-left: 20px;  
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.taskLabel{
+    margin-left: 10px;
+}
+
+.checkedStyle{
+    text-decoration: line-through;
+}
+
+.btnCard{
+    margin-right: 30px;
+    display: flex;
+    align-items: center;
+    width: 10vw;
+    justify-content: space-between;
+}
+
+.card1{
+    display: flex;
+    align-items: center;
+}
+
+.editTextCard{
+    background-color: transparent;
+    border: 0px;
+    outline: none;
+}
