@@ -7,6 +7,21 @@ class TaskForm extends Component{
 
     state = {todoItemList:[],isTodo:false,todoItem:'',warningText:''}
 
+    componentDidMount(){
+        const savedTasks = localStorage.getItem('todoItemList')
+        if(savedTasks){
+            this.setState({todoItemList:JSON.parse(savedTasks)})
+        }
+    }
+    
+    componentDidUpdate(prevProps,prevState){
+        if(prevState.todoItemList!==this.state.todoItemList){
+            localStorage.setItem('todoItemList',JSON.stringify(this.state.todoItemList))
+        }
+    }
+
+    
+
     onDelete = (id)=>{
         const {todoItemList} = this.state
         const NewList = todoItemList.filter(each=>each.id!==id)
